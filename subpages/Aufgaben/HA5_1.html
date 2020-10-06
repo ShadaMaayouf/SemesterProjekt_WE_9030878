@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Einkaufsliste</title>
+
+    <style>
+        button{
+            padding: 9px 25px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ff968a;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+        button:hover{
+            background-color: #ee9084;
+        }
+
+    </style>
+</head>
+<body>
+    <h1> Einkaufsliste </h1>
+    <label> enter new Item </label>
+    <input type="text">
+    <button> add item </button>
+
+    <ul></ul>
+
+    <script>
+        const ul = document.querySelector('ul');
+        const input = document.querySelector('input');
+        const button = document.querySelector('button');
+        button.onclick = function(){
+            const listItem = document.createElement('li');
+            listItem.innerHTML = input.value + " <button>delete</button> <br> <br>";
+            const deleteButton = listItem.querySelector('button');
+            deleteButton.onclick = () => ul.removeChild(listItem);
+            ul.appendChild(listItem);
+            input.value = '';
+            input.focus();
+        }
+    </script>
+</body>
+</html>

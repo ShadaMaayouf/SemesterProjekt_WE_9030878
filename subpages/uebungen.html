@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shada's Website</title>
+    <link rel="stylesheet" type="text/css" href="../style.css" media="screen" />
+    <script src="https://use.fontawesome.com/fc2583d4af.js"></script>
+
+</head>
+
+<style>
+
+    #services .service-top {
+        text-align: center;
+    }
+
+    #services .service-item {
+        flex-basis: 80%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        padding: 30px;
+        border-radius: 10px;
+        background-image: url(../img/Semesterprojekt.png);
+        background-size: cover;
+        margin: 10px 5%;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    #services .service-item::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-image: linear-gradient(60deg, #0088a9 0%, #485563 100%);
+        opacity: .9;
+        z-index: -1;
+    }
+    #services .service-bottom .icon {
+        height: 80px;
+        width: 80px;
+        margin-bottom: 20px;
+    }
+    #services .service-item h2 {
+        font-size: 2rem;
+        color: white;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    #services .service-item p {
+        color: white;
+        text-align: left;
+    }
+
+    .uebungenHR{
+        border-top: 1px solid #ffffff;
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    /* Media Query For Tablet */
+    @media only screen and (min-width: 768px) {
+
+        /* Services Section */
+        #services .service-bottom .service-item {
+            flex-basis: 45%;
+            margin: 2.5%;
+        }
+        #services .services {
+            flex-direction: column;
+            text-align: center;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 100px 0;
+        }
+        #services .service-top {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+
+
+        #services .service-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        #services .service-item {
+            flex-basis: 80%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            padding: 30px;
+            border-radius: 10px;
+            background-image: url(../img/Semesterprojekt.png);
+            background-size: cover;
+            margin: 10px 5%;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        #services .service-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(60deg, #0088a9 0%, #485563 100%);
+            opacity: .9;
+            z-index: -1;
+        }
+        #services .service-bottom .icon {
+            height: 80px;
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        #services .service-item h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        #services .service-item p {
+            color: white;
+            text-align: center;
+        }
+        /* End Services Section */
+
+    }
+
+    /* Media Query For Desktop */
+    @media only screen and (min-width: 1200px) {
+        #services .service-bottom .service-item {
+            flex-basis: 22%;
+            margin: 1.5%;
+        }
+    }
+
+
+</style>
+
+<body>
+
+<!-- header -->
+
+<!-- Navigation -->
+<header id="gradientbg">
+
+    <a class="navbar-brand" href="../index.html">
+        <img class="logo" src="../img/Bild1.png" alt="logo">
+    </a>
+
+    <nav  class="nav-bar">
+        <div class="nav-container">
+
+            <ul class="nav-links">
+
+                <li>
+                    <a class="blau" href="../index.html">  Startseite </a>
+                </li>
+
+                <li>
+                    <a class="gruen" href="uebungen.html">Übungen</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <a class="cta" href="contact.html">
+        <button> <i class="fa fa-phone"></i> Contact</button>
+    </a>
+</header>
+
+<!-- Übungen -->
+<section id="services">
+    <div class="services container">
+        <div class="service-top">
+            <h1 class="section-title"> Übungen nach Thema </h1>
+            <p>Alle Übungen über das ganze Semester eingeteilt nach Thema.</p>
+        </div>
+        <div class="service-bottom">
+
+            <div class="service-item">
+                    <div>
+                        <div class="icon">
+                            <img src="../img/g20.png" />
+                        </div>
+
+                        <h2>HTML/CSS</h2>
+                        <ul>
+                            <li><a href="./Aufgaben/HA2_3.html"> HA2_3: HTML-Wireframe </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA2_4.html"> HA2_4: Survey Form </a></li>
+                        </ul>
+
+                        <br><hr class="uebungenHR">
+                        <br>
+
+                        <h2>Responsive Web Design</h2>
+                        <ul>
+                            <li><a href="./Aufgaben/HA3_1.html"> HA3_1: Desktop First Responsive Design using Flexbox </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA3_2.html"> HA3_2: mobile First Responsive Design using Flexbox</a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA3_3.html"> HA3_3: Desktop First Responsive Design using Grid </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA3_4.html"> HA3_3: mobile First Responsive Design using Grid </a></li>
+                        </ul>
+                    </div>
+            </div>
+
+            <div class="service-item">
+                    <div>
+                        <div class="icon"><img src="../img/javascript-seeklogo.com.png" style="width: 80px; height: 91px;"/></div>
+                        <h2>JavaScript</h2>
+                        <ul>
+                            <li><a href="./Aufgaben/HA4_1.html"> HA4_1: Funktionen in JavaScript </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA4_2.html"> HA4_2: JavaScript-Objekte </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA5_1.html"> HA5_1: Einkaufsliste</a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA5_2.html"> HA5_2: Rednerliste mit Zeitmessung </a></li>
+                            <br>
+                            <li><a href="./Aufgaben/HA5_3.html"> HA5_3: Performanzmessungen </a></li>
+                            <br>
+                            <li><a href="Aufgaben/HA6_1.html"> HA6_1: Promises, Zeilenweise Zusammenfügen von Texts </a></li>
+                            <br>
+                            <li><a href="Aufgaben/HA6_2.html"> HA6_2: Async/Await, Zeilenweise Zusammenfügen von Texts </a></li>
+                            <br>
+                            <li><a href="Aufgaben/HA6_3/HA6_3.html"> HA6_3: WWW_Navigator </a></li>
+
+                        </ul>
+                    </div>
+            </div>
+
+
+            <div class="service-item">
+                <div>
+                    <div class="icon"><img src="../img/php-seeklogo.com.png"/></div>
+                    <h2>Modular Web</h2>
+                    <ul>
+                        <li><a href="./Aufgaben/HA7_1.html"> HA7_1: Counter mit Start und Limit </a></li>
+                        <br>
+                        <li><a href="./Aufgaben/HA7_2.html"> HA7_2: Stoppuhr </a></li>
+                        <br>
+                        <li><a href="./Aufgaben/HA7_3.html"> HA7_3: flexible Menü-Komponente </a></li>
+                    </ul>
+
+                    <br>
+                    <hr class="uebungenHR">
+                    <br>
+
+                    <h2>SVG</h2>
+                    <ul>
+                        <li><a href="./Aufgaben/HA8_1.html"> HA8_1: SVG-Diagramm </a></li>
+                        <br>
+                        <li><a href="./Aufgaben/HA8_2.html"> HA8_2: Statistik-Balkendiagramm in SVG </a></li>
+                        <br>
+                        <li><a href="./Aufgaben/HA8_3.html"> HA8_3: Bezier-Animation </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div>
+                    <div class="icon"><img src="../img/vuejs-seeklogo.com.png"/></div>
+                    <h2>VueJS</h2>
+                    <ul>
+                        <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/counter_uebung10"> HA10_1: Counter in Vue.js </a></li>
+                        <br>
+                        <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/menu_last_solutiong_uebung10"> HA10_2: Menü-Komponente </a></li>
+                        <br>
+                        <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/my_www_navigator"> HA10_3:Vue.js WWW-Navigator </a></li>
+                    </ul>
+
+                    <br><hr class="uebungenHR">
+                    <br>
+
+                    <h2>MEVN</h2>
+                    <ul>
+                        <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/fullstack_mevn_project"> HA11_1:Erweiterung der MEVN-App </a></li>
+                        <br>
+                        <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/my_www_navigator"> HA11_2: MEVN WWW-Navigator </a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="service-item">
+                    <div>
+                        <div class="icon"><img src="../img/php-seeklogo.com.png"/></div>
+                        <h2>PHP</h2>
+                        <ul>
+                            <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/phpHA/HA"> HA12_1: Registrierung mit PHP </a></li>
+                            <br>
+                            <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/phpHA/A12_2"> HA12_2: Login mit PHP </a></li>
+                            <br>
+                            <li><a href="https://github.com/ShadaMaayouf/VueJSProject/tree/master/phpHA/A12_2"> HA12_3: WWW-Navigator zum Content-Editor ausbauen </a></li>
+                        </ul>
+                    </div>
+            </div>
+
+
+
+            <div class="service-item">
+                <div>
+                    <div class="icon"><img src="../img/react-seeklogo.com.png"/></div>
+                    <h2>React</h2>
+                    <ul>
+                        <li><a href="https://github.com/ShadaMaayouf/login"> HA13_0 </a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--- Footer -->
+
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Shada<span>Maayouf</span></h3>
+
+        <p class="footer-links">
+            <a href="index.html">Home</a>
+            ·
+            <a href="subpages/uebungen.html">Übungen</a>
+            ·
+            <a href="subpages/uebungen.html">Contact</a>
+        </p>
+
+        <p class="footer-name">Shada Maayouf &copy; 2020</p>
+
+        <hr class="light">
+    </div>
+
+    <div class="footer-center">
+
+        <hr class="light">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>HochSchule Bonn-Rhein-Sieg</span> Fachbereich Informatik</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+491760000000</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:shada.maayouf@smail.inf.h-brs.de">shada.maayouf@smail.inf.h-brs.de</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-about">
+            <span>Über die Webseite</span>
+            die Webseite ist ein Semesterprojekt, das als eine Ersatzleistung für die Prüfung gelten sollte.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+        <hr class="light">
+    </div>
+
+</footer>
+
+<script src="../app.js"></script>
+
+
+
+</body>
+</html>

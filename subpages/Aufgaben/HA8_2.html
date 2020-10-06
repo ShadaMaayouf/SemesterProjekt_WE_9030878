@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistik-Balkendiagramm in SVG</title>
+</head>
+<body>
+
+<h1>Statistik-Balkendiagramm in SVG</h1>
+
+<p> Usage of Social media: </p>
+<!--Implementieren Sie ein Balkendiagramm mit Inline SVG und LitElement.
+    Geben Sie die Daten für das Balkendiagramm im JSON-Format vor.
+    Animieren Sie die Grafik wie z.B. in Bar Chart.-->
+
+<my-bar-chart>
+
+    <svg viewBox="0 0 1000 500" style="border-style:dashed" height="300px" width="500px" color="grey"  >
+
+        <text x="150" y="200" style="color: #debd4b">Anzahl Besucher je Socialmedia plattform</text>
+
+
+        <g class="bar">
+            <rect height="19" y="0" width="120"></rect>
+            <text y="15" x="200"> YouTube </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="20" width="100"></rect>
+            <text y="35" x="200"> Twitter </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="40" width="160"></rect>
+            <text y="55" x="200"> Facebook </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="60" width="90"></rect>
+            <text y="75" x="200"> Tumblr </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="80" width="180"></rect>
+            <text y="95" x="200"> Instagram </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="100" width="100"></rect>
+            <text y="115" x="200"> LinkedIn </text>
+        </g>
+
+    </svg>
+
+    <style>
+        svg {
+            margin: 30px;
+        }
+
+        text {
+            font-family: Verdana;
+            text-anchor: start;
+            fill: #debd4b;
+            font-size: 19px;
+        }
+
+        rect {
+            fill: #b22406;
+            animation-name: growBar;
+            animation-duration: 2s;
+            animation-timing-function: ease-out;
+        }
+
+        @keyframes growBar {
+            from {transform: scale(0, 1);}
+            to {transform: scale(1, 1);}
+        }
+
+    </style>
+</my-bar-chart>
+
+<script type="module">
+
+    import { LitElement, html, css, svg } from 'lit-element';
+
+    customElements.define('my-bar-chart', class extends LitElement {
+
+        render() {
+            return svg`
+             <svg viewBox="0 0 1000 500" style="border-style:dashed" height="300px" width="500px" color="grey"  >
+
+                <text x="150" y="200">Anzahl Besucher je Socialmedia plattform</text>
+
+                <g class="bar">
+                    <rect height="19" y="0" width="120"></rect>
+            <text y="15" x="200"> YouTube </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="20" width="100"></rect>
+            <text y="35" x="200"> Twitter </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="40" width="160"></rect>
+            <text y="55" x="200"> Facebook </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="60" width="90"></rect>
+            <text y="75" x="200"> Tumblr </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="80" width="180"></rect>
+            <text y="95" x="200"> Instagram </text>
+        </g>
+        <g class="bar">
+            <rect height="19" y="100" width="100"></rect>
+            <text y="115" x="200"> LinkedIn </text>
+        </g>
+
+            </svg>
+            `;
+        }
+
+        static get styles() {
+            return css`
+                svg {
+            margin: 30px;
+        }
+
+        text {
+            font-family: Verdana;
+            text-anchor: start;
+            fill: #debd4b;
+            font-size: 19px;
+        }
+
+        rect {
+            fill: #b22406;
+            animation-name: growBar;
+            animation-duration: 2s;
+            animation-timing-function: ease-out;
+        }
+
+        @keyframes growBar {
+            from {transform: scale(0, 1);}
+            to {transform: scale(1, 1);}
+        }
+`;
+        }
+
+
+
+        constructor(){
+            super();
+            this.loadJson();
+        }
+
+        static get properties() {
+            return {
+                youTube: {type: Number},
+                twitter: {type: Number},
+                faceBook: {type: Number},
+                tumblr: {type: Number},
+                instagram: {type: Number},
+                linkedIn: {type: Number}
+            }
+        }
+        async loadJson() {
+            const fetchResponse = await fetch('socials.json');
+            console.log(fetchResponse);
+            const jsonObject = await fetchResponse.json();
+            console.log(jsonObject);
+            this.youTube = jsonObject["YouTube"];
+            this.twitter = jsonObject["Twitter"];
+            this.faceBook = jsonObject["Facebook"];
+            this.tumblr = jsonObject["Tumblr"];
+            this.instagram = jsonObject["Instagram"];
+            this.linkedIn = jsonObject["LinkedIn"];
+        }
+
+        neueSocials(){
+            this.loadJson(this.youTube,"YouTube");
+            this.loadJson(this.twitter,"Twitter");
+            this.loadJson(this.faceBook,"FaceBook");
+            this.loadJson(this.tumblr,"Tumblr");
+            this.loadJson(this.instagram,"Instagram");
+            this.loadJson(this.linkedIn,"LinkedIn");
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>

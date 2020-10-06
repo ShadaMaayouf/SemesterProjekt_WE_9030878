@@ -1,0 +1,65 @@
+
+{
+  "html":{
+    "intro": {
+      "content": "HTML stands for Hyper Text Markup Language and is the standard markup language for creating Web pages.",
+      "source": "https://www.w3schools.com/html/html_intro.asp"
+    },
+    "headings": {
+      "content": "HTML headings are titles or subtitles that you want to display on a webpage. They are defined with the h1 to h6 tags.",
+      "source": "https://www.w3schools.com/html/html_headings.asp"
+    },
+    "tables": {
+      "content": "An HTML table is defined with the <table> tag. Each table row is defined with the \n <tr> tag. A table header is defined with the <th> tag. By default, table headings are bold and centered. A table data/cell is defined with the <td> tag.",
+      "source": "https://www.w3schools.com/html/html_tables.asp"
+    }
+  },
+
+  "css":{
+    "intro": {
+      "content": "CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen, paper, or in other media",
+      "source": "https://www.w3schools.com/css/css_intro.asp"
+    },
+
+    "responsive": {
+      "content": "Web pages can be viewed using many different devices: desktops, tablets, and phones. Your web page should look good, and be easy to use, regardless of the device.\n\nWeb pages should not leave out information to fit smaller devices, but rather adapt its content to fit any device",
+      "source": "https://www.w3schools.com/css/css_rwd_intro.asp"
+    },
+    "grid": {
+      "content": "The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, making it easier to design web pages without having to use floats and positioning.",
+      "source": "https://www.w3schools.com/css/css_grid.asp"
+    }
+  },
+
+  "js":{
+    "intro": {
+      "content": "JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and pretty much everything else.",
+      "source": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript"
+    },
+
+    "asynchronous": {
+      "content": " If a function relies on the result of another function, it has to wait for the other function to finish and return, and until that happens, the entire program is essentially stopped from the perspective of the user.",
+      "source": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Concepts"
+    },
+    "closures": {
+      "content": "A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"
+    }
+  },
+
+  "other":{
+    "links": {
+      "content": "other content here",
+      "source": "other source here"
+    },
+
+    "images": {
+      "content": "other content2 here",
+      "source": "other source here"
+    },
+    "tables": {
+      "content": "other content3 here",
+      "source": "other source here"
+    }
+  }
+}

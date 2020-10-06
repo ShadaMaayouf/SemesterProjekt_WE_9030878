@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Form</title>
+    <style>
+        body {
+            background: lightblue;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        div{
+            text-align: center;
+            background: #f9f9f9;
+            border: 15px lightblue;;
+            padding: 2% 4%;
+            margin: 1% 2%;
+        }
+
+        .block {
+            background-color: rgb(245, 245, 245);
+            padding: 2% 4%;
+            margin: 1% 2%;
+        }
+
+        .FormLabel {
+            display: inline-block;
+            width: 45%;
+            text-align: right;
+            padding: 7px;
+            vertical-align: top;
+        }
+
+        .answer {
+            display: inline-block;
+            padding: 7px;
+            width: 25%;
+        }
+
+        .checkBoxClass {
+            padding: 0 0 10px 0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1> Survey Form </h1>
+
+<div>
+    Let us know how we can improve freeCodeCamp<br>
+    <br>
+    <form>
+        <label class="FormLabel" for="fname">* Name:</label>
+
+        <input class="answer, PersonalInfo" type="text" id="fname" name="fname" placeholder="Enter your name">
+
+        <br><br>
+
+        <label  class="FormLabel" for="email">* Email:</label>
+
+        <input class="answer, PersonalInfo" type="text" id="email" name="email" placeholder="Enter your Email">
+
+        <br><br>
+
+        <label class="FormLabel" for="age">* Age:</label>
+        <input class="answer, PersonalInfo" type="number" id="age" name="age" placeholder="Age">
+
+        <br><br>
+
+        <label class="FormLabel">Which option best describes your current role?</label>
+
+        <select class="answer" id="role" name="role">
+          <option value="student">student</option>
+            <option value="student">tutor</option>
+            <option value="student">professor</option>
+        </select>
+
+        <br><br>
+
+        <label class="FormLabel">* How likely is it that you would recommmend freeCodeCamp to a friend? </label>
+
+        <div class="answer">
+            <div class="checkBoxClass">
+                <label>
+                    <input type="radio" name="recommendation" value="definitely"> definitely
+                </label>
+            </div>
+
+            <div class="checkBoxClass">
+                <label>
+                    <input  type="radio" name="recommendation" value="maybe"> maybe
+                </label>
+            </div>
+
+            <div class="checkBoxClass">
+                <label>
+                    <input type="radio" name="recommendation" value="Not sure"> Not sure
+                </label>
+            </div>
+        </div>
+
+        <br><br>
+
+        <label class="FormLabel">What do you like most in FCC: </label>
+
+        <select id="fcc" class="answer" name="fcc">
+          <option value="blabla" disabled="">Select an option </option>
+            <option value="Food">xx</option>
+            <option value="Food">xy</option>
+        </select>
+
+        <br><br>
+
+        <label class="FormLabel">Things that should be improved in the future (check all that apply):</label>
+
+        <div class="answer">
+            <div class="checkBoxClass">
+                <label>
+                    <input type="checkbox" name="improvements" value="x"> Front-end Projects
+                </label>
+            </div>
+
+            <div class="checkBoxClass">
+                <label>
+                    <input type="checkbox" name="improvements" value="y"> Back-End Projects
+                </label>
+            </div>
+
+            <div class="checkBoxClass">
+                <label>
+                    <input type="checkbox" name="improvements" value="z"> Data Visualisation
+                </label>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>
+    function add(x,y) {
+    return x + y;
+    }
+
+    function mul(x,y) {
+    return x * y;
+    }
+
+    function identity_function(argument){
+    return new Function('return argument');
+    }
+
+    function addf(x){
+    return function(x, b){ return x + b }
+    }
+
+
+
+    function curry(func, x) {
+    return function(y) {
+    return func(x,y);
+    }
+    }
+
+    function applyf(func) {
+    return function(x) {
+    return function(y) {
+    return func(x, y);
+    }
+    }
+    }
+    function inc1(x) {
+    return addf(x)(1);
+    }
+
+    function incv2(x) {
+    return applyf(add)(x)(1);
+    }
+
+    function methodize(func) {
+    return function(x) {
+    return func(this, x);
+    }
+    }
+
+    function demethodize(func) {
+    return function(x, y) {
+    return func.call(x, y);
+    }
+    }
+
+    function twice(func) {
+    return function(x) {
+    return func(x, x);
+    }
+    }
+
+    function composeu(f, f2) {
+    return function(x) {
+    return f2(f(3));
+    }
+    }
+
+    function composeb(f, f2) {
+    return function(x,y,z) {
+    return f2(f(x,y), z);
+    }
+    }
+
+    function once(f) {
+    return function(...args) {
+    if (f != null) {
+    tmp = f(...args);
+    f = null;
+    return tmp;
+    } else {
+    return "Error!!!";
+    }
+    }
+    }
+
+    function counterf(x) {
+    let counter = {
+    inc: function() {
+    return ++x;
+    },
+    dec: function() {
+    return --x;
+    }
+    };
+    return counter;
+    }
+
+    function revocable(func) {
+    let revocableFunction = {
+    invoke: function(...args) {
+    if (func != null)
+    return func(...args);
+    return "Error!";
+    },
+    revoke: function() {
+    func = null;
+    }
+    };
+    return revocableFunction;
+    }
+
+    ArrayWrapper = {
+    arr : [0,1,2],
+    get: function(pos) {
+    return this.arr[pos];
+    },
+    store: function(pos, input) {
+    //this.privArray.splice(pos, 0, input);
+    while(pos >= this.arr.length)
+    this.arr.push(undefined);
+    this.arr[pos] = input;
+    },
+    append: function(input) {
+    this.arr.push(input);
+    }
+    };
+
+</p>
+</body>
+</html>

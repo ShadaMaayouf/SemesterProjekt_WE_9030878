@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desktop First Flexbox Responsive Design</title>
+
+    <style>
+
+
+        body {
+            padding: 2em;
+        }
+        .flex-container {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+
+            -webkit-flex-flow: row wrap;
+            flex-flow: row wrap;
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .flex-container > * {
+            padding: 10px;
+            flex: 1 100%;
+        }
+
+        .header {
+            background: #ff5656;
+        }
+
+        .main {
+            background: deepskyblue;
+            flex-grow: 3;
+        }
+
+        .side1 {
+            background: lightgreen;
+        }
+
+        .side2 {
+            background: hotpink;
+        }
+
+       .aside, .main{
+           flex: 1 auto;
+       }
+
+
+        @media all and (max-width: 800px) {
+            .flex-container{
+                flex-wrap: wrap;
+            }
+            .side2{
+                width: 100%;
+            }
+        }
+
+        @media all and (max-width: 600px) {
+            .side1{
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="flex-container">
+        <header class="header">Header</header>
+        <aside class="aside side1">Side 1</aside>
+        <article class="main">
+            <p> Main <br><br>
+                Sehr viel content damit dieses Box länger und breiter wird. Vielleicht noch ein bisschen mehr. Okay das ist jetzt in Ordnung.
+            </p>
+        </article>
+        <aside class="aside side2">Side 2</aside>
+
+    </div>
+
+</body>
+</html>

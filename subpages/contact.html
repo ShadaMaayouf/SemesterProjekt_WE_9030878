@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shada's Website</title>
+    <link rel="stylesheet" type="text/css" href="../style.css" media="screen" />
+    <script src="https://use.fontawesome.com/fc2583d4af.js"></script>
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
+    /* contact Section */
+    #contact .contact {
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    #contact .contact-items {
+        width: 400px;
+    }
+    #contact .contact-item {
+        width: 100%;
+        text-align: center;
+        border-radius: 10px;
+        padding: 30px;
+        margin: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 18px 0 #0000002c;
+        transition: .3s ease box-shadow;
+    }
+
+    #contact .contact-item:hover {
+        box-shadow: 0 0 5px 0 #0000002c;
+        border-bottom-color: #e7e440;
+        border-bottom: 30px;
+    }
+
+    .fa-envelope {
+        color: #00abd5;
+    }
+
+    .fa-envelope:hover {
+        color: #00abd5;
+    }
+
+    .fa-envelope:after {
+        border-color: #0088a9;
+    }
+    .fa-envelope:hover {
+        background-color: transparent;
+        transform: rotate(90deg);
+        cursor: pointer;
+        box-shadow: none;
+    }
+    #contact .contact-info h2 {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    /*End contact Section */
+
+
+    /* Media Query For Tablet */
+    @media only screen and (min-width: 768px) {
+
+        /* contact  */
+        #contact .contact {
+            flex-direction: column;
+            padding: 100px 0;
+            align-items: center;
+            justify-content: center;
+            min-width: 20vh;
+        }
+        #contact .contact-items {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            margin: 0;
+        }
+        #contact .contact-item {
+            width: 40%;
+            margin: 0;
+            flex-direction: row;
+        }
+        #contact .contact-item .icon {
+            height: 100px;
+            width: 100px;
+        }
+        #contact .contact-item .icon img {
+            object-fit: contain;
+        }
+        #contact .contact-item .contact-info {
+            width: 80%;
+            text-align: left;
+            padding-left: 10px;
+            padding-right: 20px;
+        }
+        /* End contact  */
+    }
+
+    /* End Media Query For Tablet */
+
+    /* End  Media Query For Desktop */
+
+</style>
+<body>
+
+<!-- header -->
+
+<!-- Navigation -->
+<header id="gradientbg">
+
+    <a class="navbar-brand" href="../index.html">
+        <img class="logo" src="../img/Bild1.png" alt="logo">
+    </a>
+
+    <nav  class="nav-bar">
+        <div class="nav-container">
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a class="blau" href="../index.html">  Startseite </a>
+                </li>
+
+                <li>
+                    <a class="gruen" href="uebungen.html">Übungen</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <a class="cta" href="contact.html">
+        <button>Contact</button>
+    </a>
+</header>
+
+
+<!-- contact -->
+
+<section id="contact">
+    <div class="contact container">
+        <div><h1 class="section-title">Contact <span>info</span></h1></div>
+        <div class="contact-items">
+
+            <div class="contact-item">
+                <a href="mailto:shada.maayouf@smail.inf.h-brs.de">
+                    <i class="fa fa-envelope" style="font-size:40px;"></i>
+                </a>
+                <div class="contact-info">
+                    <h2>Email</h2>
+                    <h3>shada.maayouf@smail.inf.h-brs.de</h3>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <a href="https://kaul.inf.h-brs.de/data/2019/we/#21">
+                    <i class="fa fa-envelope" style="font-size:40px;"></i>
+                </a>
+                <div class="contact-info">
+                    <h2>Shada Maayouf</h2>
+                    <p>Im Rahmen des Kurses "Einführung in der Web Engineering"<br>
+                    Fachbereich Informatik<br>
+                    Hochschule Bonn-Rhein-Sieg</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End Contact Section -->
+
+
+<!--- Footer -->
+
+
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+
+        <h3>Shada<span>Maayouf</span></h3>
+
+        <p class="footer-links">
+            <a href="index.html">Home</a>
+            ·
+            <a href="subpages/uebungen.html">Übungen</a>
+            ·
+            <a href="subpages/uebungen.html">Contact</a>
+        </p>
+
+        <p class="footer-name">Shada Maayouf &copy; 2020</p>
+
+        <hr class="light">
+    </div>
+
+    <div class="footer-center">
+
+        <hr class="light">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>HochSchule Bonn-Rhein-Sieg</span> Fachbereich Informatik</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+491760000000</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:shada.maayouf@smail.inf.h-brs.de">shada.maayouf@smail.inf.h-brs.de</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-about">
+            <span>Über die Webseite</span>
+            die Webseite ist ein Semesterprojekt, das als eine Ersatzleistung für die Prüfung gelten sollte.
+        </p>
+
+        <div class="footer-icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+        </div>
+
+        <hr class="light">
+    </div>
+
+</footer>
+
+
+<script src="../app.js"></script>
+
+
+
+</body>
+</html>

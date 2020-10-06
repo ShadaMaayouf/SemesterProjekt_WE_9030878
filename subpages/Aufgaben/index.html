@@ -1,0 +1,322 @@
+<html><head>
+    <title>u6_a3</title>
+    <meta charset="UTF-8">
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+        body {
+            background-color: white;
+            font-family: sans-serif;
+        }
+        .flex-container{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        h3{
+            text-align:center;
+        }
+        .flex-item{
+            --marginvalue: 5px;
+            padding: 10px;
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+            margin: var(--marginvalue);
+
+        }
+        #oben{
+            width:calc(100% - 2 * var(--marginvalue));
+        }
+        #links{
+            width:calc(20% - 2 * var(--marginvalue));
+        }
+        #mitte{
+            width:calc(60% - 2 * var(--marginvalue));
+        }
+        #rechts{
+            width:calc(20% - 2 * var(--marginvalue));
+        }
+        #unten{
+            width:calc(100% - 2 * var(--marginvalue));
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: baseline;
+            /* background-color: #e7e7e7; */
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+            /* position: fixed;
+            top: 0; */
+            width: 100%;
+        }
+
+        .menu-item {
+            padding: 10px;
+            border-width: 1px;
+            font-weight: bold;
+        }
+
+        #submenu {
+            /* background-color: #e7e7e7; */
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+            /* position: fixed;
+            top: 0; */
+            /* width: 100%; */
+        }
+
+        .submenu-item {
+            padding: 10px;
+            border-width: 1px;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="flex-container">
+
+    <div class="flex-item" id="oben" style="background-color:grey">
+        <h3>WWW-Navigator</h3>
+        <ul class="menu">
+            <li class="menu-item" id="HTML"><a href="#">HTML</a></li>
+            <li class="menu-item" id="CSS"><a href="#">CSS</a></li>
+            <li class="menu-item" id="JavaScript"><a href="#">JavaScript</a></li>
+        </ul>
+    </div>
+
+    <div class="flex-item" id="links" style="background-color:grey">
+        <ul id="submenu">
+            <!-- <li class="submenu-item"><a href="#">Links</a></li>
+            <li class="submenu-item"><a href="#">Images</a></li>
+            <li class="submenu-item"><a href="#">Tables</a></li> -->
+        </ul>
+    </div>
+
+    <div class="flex-item" id="mitte" style="background-color:grey">
+        <p id="putTextHere"></p>
+    </div>
+
+    <div class="flex-item" id="rechts" style="background-color:grey">
+        <h3>
+            Additional Information: Links to external resources
+        </h3>
+        <ul id="references">
+        </ul>
+    </div>
+
+    <div class="flex-item" id="unten" style="background-color:grey">
+        <ul class="menu" style="justify-content: center">
+            <li class="menu-item" id="Footer">Footer:</li>
+            <li class="menu-item" id="Sitemap"><a href="#">Sitemap</a></li>
+            <li class="menu-item" id="Home"><a href="#">Home</a></li>
+            <li class="menu-item" id="News"><a href="#">News</a></li>
+            <li class="menu-item" id="Contact"><a href="#">Contact</a></li>
+            <li class="menu-item" id="About"><a href="#">About</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    const textContainer = document.getElementById('putTextHere');
+
+    function parseJson(fetchResponse) {
+        return new Promise((resolve, reject) => {
+            let jsonObject = fetchResponse.json();
+            console.log(jsonObject);
+            resolve(jsonObject);
+        });
+    }
+
+    async function loadJson(container, index1, index2, index3) { //WIE DEN JSON ZUGRIFF PARAMETRISIEREN
+        const fetchResponse = await fetch('menus.json');
+        console.log(fetchResponse);
+        const jsonObject = await parseJson(fetchResponse);
+        console.log(jsonObject);
+        console.log(jsonObject[index1][index2][index3]);
+        container.innerHTML = jsonObject[index1][index2][index3];
+        return jsonObject;
+    }
+
+    const submenu = document.getElementById('submenu');
+    const references = document.getElementById('references');
+
+    const htmlRef = document.getElementById('HTML');
+    console.log("htmlRef");
+    const cssRef = document.getElementById('CSS');
+    const javascriptRef = document.getElementById('JavaScript');
+
+    htmlRef.onclick = function() {
+        console.log("KLICKHTML");
+        textContainer.innerHTML = "HTML";
+        while (submenu.firstChild) {
+            submenu.removeChild(submenu.firstChild);
+        }
+        while (references.firstChild) {
+            references.removeChild(references.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Links</a>`;
+        subItem1.className = "submenu-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Images</a>`;
+        subItem2.className = "submenu-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Tables</a>`;
+        subItem3.className = "submenu-item";
+
+        subItem1.onclick = () => {loadJson(textContainer,"html","links","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"html","links","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(textContainer,"html","images","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"html","images","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(textContainer,"html","tables","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"html","tables","reference")
+            references.appendChild(referenceItem);
+        };
+
+        submenu.appendChild(subItem1);
+        submenu.appendChild(subItem2);
+        submenu.appendChild(subItem3);
+    }
+
+    cssRef.onclick = function() {
+        console.log("KLICKCSS");
+        textContainer.innerHTML = "CSS";
+        while (submenu.firstChild) {
+            submenu.removeChild(submenu.firstChild);
+        }
+        while (references.firstChild) {
+            references.removeChild(references.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Selectors</a>`;
+        subItem1.className = "submenu-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Colors</a>`;
+        subItem2.className = "submenu-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Fonts</a>`;
+        subItem3.className = "submenu-item";
+
+        subItem1.onclick = () => {loadJson(textContainer,"css","selectors","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"css","selectors","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(textContainer,"css","colors","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"css","colors","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(textContainer,"css","fonts","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"css","fonts","reference")
+            references.appendChild(referenceItem);
+        };
+
+        submenu.appendChild(subItem1);
+        submenu.appendChild(subItem2);
+        submenu.appendChild(subItem3);
+    }
+
+    javascriptRef.onclick = function() {
+        console.log("KLICKJS");
+        textContainer.innerHTML = "JavaScript";
+        while (submenu.firstChild) {
+            submenu.removeChild(submenu.firstChild);
+        }
+        while (references.firstChild) {
+            references.removeChild(references.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Objects</a>`;
+        subItem1.className = "submenu-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Functions</a>`;
+        subItem2.className = "submenu-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Closures</a>`;
+        subItem3.className = "submenu-item";
+
+        subItem1.onclick = () => {loadJson(textContainer,"javascript","objects","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"javascript","objects","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(textContainer,"javascript","functions","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"javascript","functions","reference")
+            references.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(textContainer,"javascript","closures","content");
+            while (references.firstChild) {
+                references.removeChild(references.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "reference";
+            const link = loadJson(referenceItem,"javascript","closures","reference")
+            references.appendChild(referenceItem);
+        };
+
+        submenu.appendChild(subItem1);
+        submenu.appendChild(subItem2);
+        submenu.appendChild(subItem3);
+    }
+
+</script>
+
+
+
+</body></html>

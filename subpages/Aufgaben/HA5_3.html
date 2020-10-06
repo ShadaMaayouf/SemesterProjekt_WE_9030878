@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performanzmessungen</title>
+    <style>table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    </style>
+</head>
+<body>
+<h1> Rednerliste</h1>
+
+<table>
+    <tr>
+        <th> Element </th>
+        <th> Performanz </th>
+    </tr>
+    <tr>
+        <td>innerHTML</td>
+        <td id="innerHTML"></td>
+    </tr>
+    <tr>
+        <td>innerText</td>
+        <td id="innerText"></td>
+    </tr>
+    <tr>
+        <td>outerHTML</td>
+        <td id="outerHTML"></td>
+    </tr>
+    <tr>
+        <td>textContent</td>
+        <td id="textContent"></td>
+    </tr>
+
+</table>
+<p id="test"></p>
+
+</body>
+</html>

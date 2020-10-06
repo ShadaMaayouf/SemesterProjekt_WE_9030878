@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Desktop First Grid Responsive</title>
+
+    <style>
+        body {
+            padding: 2em;
+        }
+
+        .header{
+            background: #2c3e50;
+            grid-area: header;
+            text-align: center;
+        }
+
+        #kopf a{
+            color: white;
+            text-decoration: none;
+            font-size: 200%;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 50px;
+            margin-left: 15px;
+        }
+
+        #nav a{
+            width: 20%;
+            display: inline-block;
+            float: left;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            height: 30px;
+        }
+
+        #nav a:hover{
+            background-color: rgba(199,199,199,0.3);
+        }
+        .blau{
+            border-top: solid 5px #23a6d5;
+        }
+
+        .gruen{
+            border-top: solid 5px #90d174;
+        }
+
+        .gelb{
+            border-top: solid 5px #fff345;
+        }
+
+
+        .main {
+            background: deepskyblue;
+            grid-area: main;
+        }
+        .side1 {
+            background: lightgreen;
+            grid-area: side1;
+        }
+        .side2{
+            background: hotpink;
+            grid-area: side2;
+        }
+
+        footer{
+            background: #2c3e50;
+            grid-area: footer;
+        }
+
+        .footer-links, .side1-links{
+            color:  #ffffff;
+            margin: 20px 0 12px;
+            padding: 0;
+        }
+
+        .footer-links a, .side1-links a{
+            line-height: 1.8;
+            text-decoration: none;
+            color:  inherit;
+        }
+        .footer-links a {
+            display: inline-block;
+        }
+
+        .side1-links{
+            display: block;
+        }
+
+        #subNavSide1{
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+            color: white;
+        }
+        .subNavSide1-item {
+            border-width: 1px;
+            color: white;
+        }
+        .grid-container {
+            width: 100%;
+            display: grid;
+            grid-gap: 5px 5px;
+            grid-template-columns: 120px auto 120px;
+            grid-template-areas: "header  header  header"
+            "side1 main side2"
+        "footer footer footer";
+            text-align: center;
+            color: white;
+        }
+
+        @media only screen and (max-width: 800px)   {
+            .grid-container {
+                grid-template-columns: 20% auto;
+                grid-template-areas:
+                        "header   header"
+                        "side1  main"
+                        "side2 side2"
+                        "footer footer";
+            }
+        }
+
+        @media only screen and (max-width: 500px)  {
+            .grid-container {
+                grid-template-columns: 100% auto;
+                grid-template-areas:
+                        "header"
+                        "side1"
+                        "main"
+                        "side2"
+                        "footer";
+                margin: 0 auto;
+            }
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="grid-container">
+    <header class="header">
+
+        WWW-Navigator
+        <div id="nav">
+
+            <a class="blau" id="html" href="#">  HTML </a>
+
+            <a class="gruen" id="css" href="#">CSS</a>
+
+            <a class="gelb" id="js" href="#">JavaScript</a>
+
+            <a class="blau" id="other" href="#">other</a>
+
+        </div>
+
+    </header>
+    <aside class="aside side1">
+        Side 1
+        <p class="side1-links">
+            <ul id="subNavSide1">
+
+            </ul>
+        </p>
+    </aside>
+    <article class="main">
+        <p id="spill">
+            <!--  hier kommt text von Json rein-->
+        </p>
+    </article>
+    <aside class="aside side2">
+        Side 2
+        <ul id="subNavSide2">
+
+        </ul>
+    </aside>
+
+    <footer class="footer">
+        Footer: <p class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">Übungen</a>
+            <a href="#">Contact</a>
+        </p>
+    </footer>
+</div>
+
+
+</body>
+
+<script>
+    function parseJson(fetchResponse) {
+        return new Promise((resolve, reject) => {
+            resolve(fetchResponse.json());
+        });
+    }
+
+    async function loadJson(inhalt, index1, index2, index3) {
+        const fetchResponse = await fetch('menu');
+        const jsonObject = await parseJson(fetchResponse);
+        inhalt.innerHTML = jsonObject[index1][index2][index3];
+        return jsonObject;
+    }
+
+    const htmlNav = document.getElementById('html');
+    const cssNav = document.getElementById('css');
+    const jsNav = document.getElementById('js');
+    const otherNav = document.getElementById('other');
+    const subNavSide1 = document.getElementById('subNavSide1');
+    const subNavSide2 = document.getElementById('subNavSide2');
+    const spillTextP = document.getElementById('spill');
+
+
+    htmlNav.onclick = function() {
+
+        spillTextP.innerHTML = "HTML";
+        while (subNavSide1.firstChild) {
+            subNavSide1.removeChild(subNavSide1.firstChild);
+        }
+        while (subNavSide2.firstChild != null) {
+            subNavSide2.removeChild(subNavSide2.firstChild);
+        }
+
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Intro</a>`;
+        subItem1.className = "subNavSide1-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Headings</a>`;
+        subItem2.className = "subNavSide1-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Tables</a>`;
+        subItem3.className = "subNavSide1-item";
+
+        subItem1.onclick = () => {
+            loadJson(spillTextP,"html","intro","content");
+            while (subNavSide2.firstChild  != null) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const subNavSide2Item = document.createElement('li');
+            subNavSide2Item.className = "subNavSide2-item";
+            loadJson(subNavSide2Item,"html","intro","source");
+            subNavSide2.appendChild(subNavSide2Item);
+        };
+        subItem2.onclick = () => {
+            loadJson(spillTextP,"html","headings","content");
+            while (subNavSide2.firstChild  != null) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const subNavSide2Item = document.createElement('li');
+            subNavSide2Item.className = "subNavSide2-item";
+            loadJson(subNavSide2Item,"html","headings","source");
+            subNavSide2.appendChild(subNavSide2Item);
+        };
+        subItem3.onclick = () => {
+            loadJson(spillTextP,"html","tables","content");
+            while (subNavSide2.firstChild  != null) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const subNavSide2Item = document.createElement('li');
+            subNavSide2Item.className = "subNavSide2-item";
+            loadJson(subNavSide2Item,"html","tables","source");
+            subNavSide2.appendChild(subNavSide2Item);
+        };
+
+        subNavSide1.appendChild(subItem1);
+        subNavSide1.appendChild(subItem2);
+        subNavSide1.appendChild(subItem3);
+    };
+
+
+    cssNav.onclick = function() {
+
+        spillTextP.innerHTML = "css";
+        while (subNavSide1.firstChild) {
+            subNavSide1.removeChild(subNavSide1.firstChild);
+        }
+        while (subNavSide2.firstChild) {
+            subNavSide2.removeChild(subNavSide2.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Intro</a>`;
+        subItem1.className = "subNavSide1-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Responsive WD</a>`;
+        subItem2.className = "subNavSide1-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Grids</a>`;
+        subItem3.className = "subNavSide1-item";
+
+        subItem1.onclick = () => {loadJson(spillTextP,"css","intro","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"css","intro","source")
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(spillTextP,"css","responsive","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"css","responsive","source")
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(spillTextP,"css","grid","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"css","grid","source")
+            subNavSide2.appendChild(referenceItem);
+        };
+
+        subNavSide1.appendChild(subItem1);
+        subNavSide1.appendChild(subItem2);
+        subNavSide1.appendChild(subItem3);
+    };
+
+
+    jsNav.onclick = function() {
+
+        spillTextP.innerHTML = "JavaScript";
+        while (subNavSide1.firstChild) {
+            subNavSide1.removeChild(subNavSide1.firstChild);
+        }
+        while (subNavSide2.firstChild) {
+            subNavSide2.removeChild(subNavSide2.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">intro</a>`;
+        subItem1.className = "subNavSide1-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">asynchronous JS</a>`;
+        subItem2.className = "subNavSide1-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">closures</a>`;
+        subItem3.className = "subNavSide1-item";
+
+        subItem1.onclick = () => {loadJson(spillTextP,"js","intro","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"js","intro","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(spillTextP,"js","asynchronous","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"js","asynchronous","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(spillTextP,"js","closures","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"js","closures","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+
+        subNavSide1.appendChild(subItem1);
+        subNavSide1.appendChild(subItem2);
+        subNavSide1.appendChild(subItem3);
+    }
+
+
+    otherNav.onclick = function() {
+
+        spillTextP.innerHTML = "other";
+        while (subNavSide1.firstChild) {
+            subNavSide1.removeChild(subNavSide1.firstChild);
+        }
+        while (subNavSide2.firstChild) {
+            subNavSide2.removeChild(subNavSide2.firstChild);
+        }
+        const subItem1 = document.createElement('li');
+        subItem1.innerHTML = `<a href="#">Objects</a>`;
+        subItem1.className = "subNavSide1-item";
+        const subItem2 = document.createElement('li');
+        subItem2.innerHTML = `<a href="#">Functions</a>`;
+        subItem2.className = "subNavSide1-item";
+        const subItem3 = document.createElement('li');
+        subItem3.innerHTML = `<a href="#">Closures</a>`;
+        subItem3.className = "subNavSide1-item";
+
+        subItem1.onclick = () => {loadJson(spillTextP,"other","links","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"other","links","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem2.onclick = () => {loadJson(spillTextP,"other","images","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"other","images","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+        subItem3.onclick = () => {loadJson(spillTextP,"other","tables","content");
+            while (subNavSide2.firstChild) {
+                subNavSide2.removeChild(subNavSide2.firstChild);
+            }
+            const referenceItem = document.createElement('li');
+            referenceItem.className = "subNavSide2-item";
+            loadJson(referenceItem,"other","tables","source");
+            subNavSide2.appendChild(referenceItem);
+        };
+
+        subNavSide1.appendChild(subItem1);
+        subNavSide1.appendChild(subItem2);
+        subNavSide1.appendChild(subItem3);
+    }
+
+
+
+</script>
+</html>

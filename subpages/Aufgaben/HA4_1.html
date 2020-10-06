@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Funktionen</title>
+    <style>
+
+        .wrapper{
+            margin: 0 auto;
+        }
+
+        button{
+            padding: 9px 25px;
+            border: none;
+            border-radius: 50px;
+            background-color: #00abd5;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+        button:hover{
+            background-color: rgba(0, 136, 169, 0.8);
+        }
+
+
+    </style>
+</head>
+
+
+<script>
+    function add(x,y) {
+        return x + y;
+    }
+
+    function mul(x,y) {
+        return x * y;
+    }
+
+    /* Schreiben Sie eine Funktion identity_function(),
+    die ein Argument als Parameter entgegen nimmt und eine Funktion zurück gibt,
+    die dieses Argument zurück gibt. */
+
+    function identity_function(argument){
+        function inner_function(argument2) {
+            return argument2;
+        }
+        return inner_function(argument);
+    }
+
+    /*Schreiben Sie eine Addier-Funktion addf(),
+    so dass addf(x)(y) genau x + y zurück gibt.
+    (Es haben also zwei Funktionsaufrufe zu erfolgen. addf(x) liefert eine Funktion, die auf y angewandt wird.)*/
+
+    function addf(x){
+        return function(y){ return x + y }
+    }
+
+
+
+
+    /* Schreiben Sie eine Funktion curry() (von Currying), die eine binäre Funktion
+    und ein Argument nimmt, um daraus eine Funktion zu erzeugen, die ein zweites Argument
+    entgegen nimmt, z.B. add3 = curry(add, 3);add3(4) ergibt 7. curry(mul, 5)(6) ergibt 30. */
+
+    function curry(func, x) {
+        return function(y) {
+            return func(x,y);
+        }
+    }
+
+    /* Schreiben Sie eine Funktion applyf(), die aus einer binären Funktion wie add(x,y)
+eine Funktion addfberechnet, die mit zwei Aufrufen das gleiche Ergebnis liefert,
+z.B. addf = applyf(add); addf(x)(y) soll add(x,y) liefern. Entsprechend applyf(mul)(5)(6)
+soll 30 liefern, wenn mul die binäre Multiplikation ist. */
+
+    function applyf(func) {
+        return function(x) {
+            return function(y) {
+                return func(x, y);
+            }
+        }
+    }
+
+    /* Erzeugen Sie die inc-Funktion mit Hilfe einer der Funktionen addf,
+    applyf und curry aus den letzten Aufgaben, ohne die Funktion inc() selbst zu implementieren.
+    (inc(x) soll immer x + 1 ergeben und lässt sich natürlich auch direkt implementieren.
+    Das ist aber hier nicht die Aufgabe.) Vielleicht schaffen Sie es auch, drei Varianten der
+    inc()-Implementierung zu schreiben? */
+    function inc1(x) {
+        return addf(x)(1);
+    }
+
+    function inc2(x) {
+        return applyf(add)(x)(1);
+    }
+
+    /* Schreiben Sie eine Funktion methodize(), die eine binäre Funktion (z.B. add, mul)
+in eine unäre Methode verwandelt. Nach Number.prototype.add = methodize(add);
+soll (3).add(4) genau 7 ergeben. */
+    function methodize(func) {
+        return function(x) {
+            return func(this, x);
+        }
+    }
+
+    Number.prototype.add = methodize(add);
+    Number.prototype.mul = methodize(mul);
+
+    function demethodize(func) {
+
+        Number.prototype.operationFunc=func;
+        return function(x, y) {
+            return (x).operationFunc(y);
+        }
+    }
+
+
+    function twice(func) {
+        return function(x) {
+            return func(x, x);
+        }
+    }
+    var double = twice(add);
+    var square = twice(mul);
+
+    /* Schreiben Sie eine Funktion composeu(), die zwei unäre Funktionen in eine einzelne
+unäre Funktion transformiert, die beide nacheinander aufruft, z.B. soll
+composeu(double, square)(3) genau 36 ergeben. */
+
+    function composeu(f, f2) {
+        return function(x) {
+            return f2(f(x));
+        }
+    }
+
+    /* Schreiben Sie eine Funktion composeb(),
+die zwei binäre Funktionen in eine einzelne Funktion transformiert,
+die beide nacheinander aufruft, z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben. */
+
+    function composeb(f, f2) {
+        return function(x,y,z) {
+            return f2(f(x,y), z);
+        }
+    }
+
+    /* Schreiben Sie eine Funktion once(), die einer anderen Funktion nur einmal erlaubt,
+    aufgerufen zu werden, z.B. add_once = once(add); add_once(3, 4) soll beim ersten Mal 7 ergeben,
+    beim zweiten Mal soll jedoch add_once(3, 4) einen Fehlerabbruch bewirken. */
+
+    function once(f) {
+        return function(...args) {
+            if (f != null) {
+                tmp = f(...args);
+                f = null;
+                return tmp;
+            } else {
+                return "Error!!!";
+            }
+        }
+    }
+    var add_once = once(add);
+
+
+    /* Schreiben Sie eine Fabrik-Funktion counterf(), die zwei Funktionen inc() und dec() berechnet,
+    die einen Zähler hoch- und herunterzählen. Z.B. counter = counterf(10);
+    Dann soll counter.inc() 11 und counter.dec() wieder 10 ergeben. */
+    function counterf(x) {
+        let counter = {
+            inc: function() {
+                return ++x;
+            },
+            dec: function() {
+                return --x;
+            }
+        };
+        return counter;
+    }
+
+    /* Schreiben Sie eine rücknehmbare Funktion revocable(),
+    die als Parameter eine Funktion nimmt und diese bei Aufruf ausführt.
+    Sobald die Funktion aber mit revoke() zurück genommen wurde,
+    führt ein erneuter Aufruf zu einem Fehler. Z.B.
+    temp = revocable(alert);
+    temp.invoke(7); // führt zu alert(7);
+    temp.revoke();
+    temp.invoke(8); // Fehlerabbruch! */
+        function revocable(func) {
+            let revocableFunction = {
+                invoke: function(...args) {
+                    if (func != null)
+                        return func(...args);
+                    return "Error!";
+                },
+                revoke: function() {
+                    func = null;
+                }
+            };
+            return revocableFunction;
+        }
+    function ok(i){
+        return "OK " + i;
+    }
+    var temp = revocable(ok);
+
+
+    ArrayWrapper = {
+            arr : [0,1,2],
+            get: function(pos) {
+                return this.arr[pos];
+            },
+            store: function(pos, input) {
+                //this.privArray.splice(pos, 0, input);
+                while(pos >= this.arr.length)
+                    this.arr.push(undefined);
+                this.arr[pos] = input;
+            },
+            append: function(input) {
+                this.arr.push(input);
+            }
+        };
+    function showResult(){
+        let arr1 = array_wrapper();
+
+        console.log(arr1.append(3));
+        console.log(arr1.append(2));
+        console.log(arr1.append(1));
+        console.log(arr1.append(0));
+
+        console.log(arr1.get(0));
+        console.log(arr1.get(1));
+        console.log(arr1.get(2));
+        console.log(arr1.get(3));
+
+        console.log(arr1.store(1, 0));
+
+        console.log(arr1.get(0));
+        console.log(arr1.get(1));
+        console.log(arr1.get(2));
+        console.log(arr1.get(3));
+
+        let arr2 = array_wrapper();
+        console.log(arr2.get(0));
+        console.log(arr2.get(1));
+        console.log(arr2.get(2));
+        console.log(arr2.get(3));
+        console.log(array_obj[0]);
+    }
+
+</script>
+<body>
+
+    <div class="wrapper">
+
+        <div>
+            <button onclick="document.getElementById('demoAdd').innerHTML = add(4,5);">add 4+5</button><a class="close"></a>
+            <p id="demoAdd"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoMul').innerHTML = mul(4,5);">mul 4*5</button><a class="close"></a>
+            <p id="demoMul"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoId').innerHTML = identity_function(4)">identity function with argument 4 </button><a class="close"></a>
+            <p id="demoId"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoAddf').innerHTML = addf(4)(5);">addf 4+5</button><a class="close"></a>
+            <p id="demoAddf"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoApplyf').innerHTML = applyf(add)(5)(6);">applyf (add)(5)(6)</button><a class="close"></a>
+            <p id="demoApplyf"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoApplyfMul').innerHTML = applyf(mul)(5)(6);">applyf (mul)(5)(6)</button><a class="close"></a>
+            <p id="demoApplyfMul"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('democurry').innerHTML = curry(add,5)(6);">curry(add,5)(6)</button><a class="close"></a>
+            <p id="democurry"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoincv1').innerHTML = inc1(4);">inc1(4) version 1</button><a class="close"></a>
+            <p id="demoincv1"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoincv2').innerHTML = inc2(4);">inc2(4) version 2</button><a class="close"></a>
+            <p id="demoincv2"></p>
+        </div>
+
+
+        <div>
+            <button onclick="document.getElementById('demoMethodize').innerHTML = (3).add(4);">methodize (3).add(4)</button><a class="close"></a>
+            <p id="demoMethodize"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoMethodizeMul').innerHTML = (3).mul(4);">methodize (3).mul(4)</button><a class="close"></a>
+            <p id="demoMethodizeMul"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoDemethodize').innerHTML = demethodize(Number.prototype.add)(5, 6);">demethodize(Number.prototype.add)(5, 6)</button><a class="close"></a>
+            <p id="demoDemethodize"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoTwice').innerHTML = double(4);">twice double(4)</button><a class="close"></a>
+            <p id="demoTwice"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoTwiceSquare').innerHTML = square(4);">twice square(4)</button><a class="close"></a>
+            <p id="demoTwiceSquare"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoComposeU').innerHTML = composeu(double, square)(3);">composeu(double, square)(3)</button><a class="close"></a>
+            <p id="demoComposeU"></p>
+        </div>
+
+
+        <div>
+            <button onclick="document.getElementById('demoComposeB').innerHTML = composeb(add,mul)(2,3,5);">composeb(add,mul)(2,3,5)</button><a class="close"></a>
+            <p id="demoComposeB"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoonce').innerHTML = add_once(3,4);">add_once(3,4)</button><a class="close"></a>
+            <p id="demoonce"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoCounterf').innerHTML = counterf(4).inc();">counterf(4).inc()</button><a class="close"></a>
+            <p id="demoCounterf"></p>
+        </div>
+        <div>
+            <button onclick="document.getElementById('demoCounterfDec').innerHTML = counterf(4).dec();">counterf(4).dec()</button><a class="close"></a>
+            <p id="demoCounterfDec"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demorevocable').innerHTML = temp.invoke(7);">revocable</button><a class="close"></a>
+            <p id="demorevocable"></p>
+        </div>
+
+        <div>
+            <button onclick="document.getElementById('demoAW').innerHTML = ArrayWrapper.get(0); showResult(); document.getElementById('operationsOnArray').innerHTML = 'öffnen Sie die Konsole!';">ArrayWrapper.get(0)</button><a class="close"></a>
+            <p id="demoAW"></p>
+            <p id="operationsOnArray"></p>
+        </div>
+
+    </div>
+</body>
+</html>

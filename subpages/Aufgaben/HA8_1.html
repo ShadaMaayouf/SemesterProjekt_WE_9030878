@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG-Diagramm</title>
+
+    <style>
+
+        svg {
+            margin: 30px;
+        }
+
+        g {
+            animation-name: doubleInSize;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-play-state: paused;
+        }
+        g:hover {
+            animation-play-state: running;
+        }
+
+        text {
+            text-anchor: start;
+            font-family: Verdana;
+            fill: white;
+            font-size: 20px;
+        }
+
+        line {
+            stroke: white;
+            stroke-width: 1;
+        }
+
+        @keyframes doubleInSize {
+            from {transform: scale(1);}
+            to {transform: scale(2);}
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>SVG Use The Platform</h1>
+
+<svg viewBox="0 0 200 220" style="border-style: dashed" height="650px" width="600px">
+
+    <g>
+        <rect x="0" y="0"  width="110" height="120" fill="#CB798D"></rect>
+        <text x="10" y="30">Use</text>
+        <line x1="10" y1="35" x2="90" y2="35"></line>
+        <text x="10" y="60">The</text>
+        <line x1="10" y1="65" x2="90" y2="65"></line>
+        <text x="10" y="90">Platform</text>
+        <line x1="10" y1="95" x2="90" y2="95"></line>
+    </g>
+
+</svg>
+
+
+</body>
+</html>

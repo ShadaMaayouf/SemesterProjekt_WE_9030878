@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Desktop First Grid Responsive</title>
+
+    <style>
+        body {
+            padding: 2em;
+        }
+
+        .header{
+            background: #ff5656;
+            grid-area: header;
+        }
+
+        .main {
+            background: deepskyblue;
+            grid-area: main;
+        }
+        .side1 {
+            background: lightgreen;
+            grid-area: side1;
+        }
+        .side2{
+            background: hotpink;
+            grid-area: side2;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-gap: 5px 5px;
+            grid-template-columns: 120px auto 120px;
+            grid-template-areas: "header  header  header"
+            "side1 main side2";
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 800px)   {
+            .grid-container {
+                grid-template-columns: 20% auto;
+                grid-template-areas:
+                        "header   header"
+                        "side1  main"
+                        "side2 side2";
+            }
+        }
+
+        @media only screen and (max-width: 500px)  {
+            .grid-container {
+                grid-template-columns: 100% auto;
+                grid-template-areas:
+                        "header"
+                        "side1"
+                        "main"
+                        "side2";
+                margin: 0 auto;
+            }
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="grid-container">
+    <header class="header">Header</header>
+    <aside class="aside side1">Side 1</aside>
+    <article class="main">
+        <p> Main <br><br>
+        Sehr viel content damit dieses Box länger und breiter wird. Vielleicht noch ein bisschen mehr. Okay das ist jetzt in Ordnung.
+        </p>
+    </article>
+    <aside class="aside side2">Side 2</aside>
+</div>
+
+
+</body>
+</html>

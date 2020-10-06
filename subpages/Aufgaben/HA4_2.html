@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript-Objekte</title>
+    <style>
+        button{
+            padding: 9px 25px;
+            border: none;
+            border-radius: 50px;
+            background-color: #ffe710;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+        button:hover{
+            background-color: gold;
+        }
+
+    </style>
+</head>
+<script>
+
+    function Fabrikfuntion1() {
+        var arr = [];
+
+        var pushItem = item => {
+            arr.push(item);
+            return item + "pushed!";
+        };
+        var popItem = () => {
+            arr.shift();
+            return item + "dequeued!";
+        };
+
+        var top = ()=>{
+            return arr[0] + "dequeued!";
+        };
+
+        return {pushItem, popItem, top};
+    }
+    let queue1= Fabrikfuntion1();
+
+
+    /* Schreiben Sie eine JavaScript-Fabrikfunktion für ungeordnete Mengen.
+In ungeordneten Mengen tritt kein Element mehrfach auf. Privatisieren Sie so viel wie möglich.
+Schreiben Sie Tests für Ihre Implementierung.  */
+
+    function Fabrikfunktion2 () {
+        var menge = [];
+
+        var contains = (item) =>{
+            return menge.includes(item);
+        };
+        var insert = (item) => {if(!contains(item)){
+            menge.push(item);
+            return item + "pushed!";
+        }
+        else{
+            return "duplicate item!";
+        }
+        };
+
+        var remove = (item) => {
+            if(contains(item)){
+                if(menge.indexOf(item)===menge.length-1){
+                    menge.pop();
+                }
+                var temp = menge.indexOf(item);
+                menge[temp] = menge.pop();
+
+                return item + "popped!";
+            }
+            else{
+                return "can't find " + item;
+            }
+        };
+
+        return {contains, insert, remove};
+    }
+    let mengeFactory = Fabrikfunktion2();
+
+
+    /* Schreiben Sie eine JavaScript-Fabrikfunktion für ungeordnete Multi-Mengen.
+In ungeordneten Multi-Mengen dürfen Elemente mehrfach auftreten.
+Privatisieren Sie so viel wie möglich. Schreiben Sie Tests für Ihre Implementierung.  */
+
+    function Fabrikfunktion3 () {
+        var menge = [];
+
+        var contains = (item) =>{
+            return menge.includes(item);
+        };
+        var insert = (item) => {
+            menge.push(item);
+            return item + "pushed!";
+        };
+
+        var remove = (item) => {
+            if(contains(item)){
+                if(menge.indexOf(item)===menge.length-1){
+                    menge.pop();
+                }
+                var temp = menge.indexOf(item);
+                menge[temp] = menge.pop();
+
+                return item + "popped!";
+            }
+            else{
+                return "can't find " + item;
+            }
+        };
+
+        return {contains, insert, remove};
+    }
+    let multiMengeFactory = Fabrikfunktion3();
+
+</script>
+<body>
+
+<div>
+    <button onclick=" console.log(queue1.pushItem(3)); document.getElementById('demo').innerHTML = 'öffnen Sie die Konsole!';">Queue-FIFO-Fabrik </button><a class="close"></a>
+    <p id="demo"></p>
+</div>
+
+<div>
+    <button onclick="console.log(mengeFactory.insert(0)); console.log(mengeFactory.contains(0)); console.log(mengeFactory.insert(1)); console.log(mengeFactory.insert(1)); console.log(mengeFactory.remove(2)); console.log(mengeFactory.contains(2)); document.getElementById('demo2').innerHTML = 'öffnen Sie die Konsole!';">Menge-Fabrik </button><a class="close"></a>
+    <p id="demo2"></p>
+</div>
+
+<div>
+    <button onclick="console.log(multiMengeFactory.insert(0)); console.log(multiMengeFactory.contains(0)); console.log(multiMengeFactory.insert(1)); console.log(multiMengeFactory.insert(1)); console.log(multiMengeFactory.remove(2)); console.log(multiMengeFactory.contains(2)); document.getElementById('demo3').innerHTML = 'öffnen Sie die Konsole!';">Multi-Menge-Fabrik </button><a class="close"></a>
+    <p id="demo3"></p>
+</div>
+
+
+</body>
+</html>

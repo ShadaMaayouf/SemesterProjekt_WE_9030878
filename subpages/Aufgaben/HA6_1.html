@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe 6.1: Promises</title>
+</head>
+<body>
+
+<p></p>
+
+<script>
+
+    function holeTexts(a,b) {
+        return Promise.all([
+            fetch(a).then(
+                response => response.text()
+            ),
+            fetch(b).then(
+                response => response.text()
+            )
+        ]);
+    }
+
+    function splitTexts(texte) {
+        return [texte[0].toString().split('\n'),
+            texte[1].toString().split('\n')];
+    }
+
+    function zusammenFuegen(arr) {
+        let res = "";
+
+        for (var i = 0; i < arr[0].length && i < arr[1].length; i++) {
+            res = res.concat(arr[0][i], '<br>', arr[1][i], '<br>');
+        }
+        if (arr[0].length < arr[1].length) { //falls A.txt kürzer als B.txt
+            for (var i = arr[0].length; i < arr[1].length; ++i) {
+                res = res.concat(arr[1][i], '<br>');
+            }
+        }
+        if (arr[0].length > arr[1].length) { //falls A.txt kürzer als B.txt
+            for (var i = arr[1].length; i < arr[0].length; ++i) {
+                res = res.concat( arr[0][i], '<br>');
+            }
+        }
+
+        return res;
+    }
+
+    function applyOn(fetchedTexts) {
+        const zeilenAlsArray = splitTexts(fetchedTexts);
+        const concText = zusammenFuegen(zeilenAlsArray);
+        const resultierenderText = document.querySelector('p');
+        resultierenderText.innerHTML = concText;
+    }
+
+    holeTexts('A.txt', 'B.txt').then(
+        fetchedTexts => applyOn(fetchedTexts)
+    );
+
+</script>
+
+</body>
+</html>

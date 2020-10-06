@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>RednerListe</title>
+
+    <style>
+        button{
+            padding: 9px 25px;
+            border: none;
+            border-radius: 80px;
+            background-color: #a0e85f;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+        button:hover{
+            background-color: #80b94c;
+        }
+
+    </style>
+
+    <script>
+        function Timecounter() {
+
+                var hours= 0, minutes=0,seconds=0;
+
+            return {
+                tick: function() {
+                    seconds++;
+                    if(seconds >= 60) {
+                        minutes++;
+                        seconds -= 60;
+                        if(minutes >= 60) {
+                            hours++;
+                            minutes -= 60;
+                        }
+                    }
+                },
+                getHours: () => (hours < 10) ? '0' + hours : hours,
+                getMinutes: () => (minutes < 10) ? '0' + minutes : minutes,
+                getSeconds: () => (seconds < 10) ? '0' + seconds : seconds
+            };
+        }
+
+
+    </script>
+</head>
+<body>
+<h1> RednerListe</h1>
+<label> enter new Redner </label>
+<input type="text">
+<button id="addBtn"> add Redner </button>
+<ul></ul>
+
+<script>
+    const ul = document.querySelector('ul');
+    const input = document.querySelector('input');
+    const button = document.getElementById('addBtn');
+
+    button.onclick = function(){
+
+        var timer = new Timer(input.value);
+        timerCheck();
+        //timer.start();
+
+        const listItem = document.createElement('li');
+        listItem.innerHTML = input.value + "  "+ Timecounter().getHours()+":"+Timecounter().getMinutes()+":"+Timecounter().getSeconds() +" "+" <button id='startBtn' onclick='timeF()'>start</button><button id='deleteBtn'>delete</button>";
+        ul.appendChild(listItem);
+        const deleteButton = document.getElementById('deleteBtn');
+        deleteButton.onclick = () => ul.removeChild(listItem);
+        input.value = '';
+        input.focus();
+    };
+
+    function timerCheck(){
+        var andere = document.getElementsByClassName('laeuft');
+        [...andere].forEach(element => { element.click(); element.setAttribute("class", "laeuftnicht");});
+    }
+
+    function Timer(name) {
+        var zeit = 0;
+        var redner = name;
+        var counting = false;
+
+        //timer estellen...
+    }
+</script>
+</body>
+</html>
